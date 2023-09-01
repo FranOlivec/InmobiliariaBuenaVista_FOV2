@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: 1
+  price: 1
+  type: one
+  building: one
+  status: one
+  modality: one
+
+two:
+  number: 1
+  price: 1
+  type: two
+  building: two
+  status: two
+  modality: two
