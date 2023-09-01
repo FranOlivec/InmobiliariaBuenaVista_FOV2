@@ -1,2 +1,35 @@
-<h1>Homes#index</h1>
-<p>Find me in app/views/homes/index.html.erb</p>
+<!-- Información de contacto -->
+<h1>Bienvenido a InmobiliariaBuenaVista_FOV</h1>
+<p>Información de contacto: +56 2 2345 6789</p>
+
+<!-- Listado de apartamentos -->
+<div class="container mt-5">
+    <h2>Departamentos disponibles:</h2>
+    <div class="row">
+      <% @departments.each do |department| %>
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title"><strong>Número: <%= department.number %></strong></h5>
+              <p class="card-text">
+                Tipología: <%= department.type.name %><br>
+                Modalidad: <%= department.modality.name %><br>
+                Precio: $<%= department.price %><br>
+              </p>
+            </div>
+            <% if department.image.attached? %>
+              <img src="<%= url_for(department.image) %>" class="card-img-top" alt="...">
+            <% else %>
+              <div class="card-body">
+                <p class="card-text">No hay imagen disponible</p>
+              </div>
+            <% end %>
+            <div class="card-footer">
+              <%= link_to 'Ver detalles', department_path(department), class: 'btn btn-primary' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  

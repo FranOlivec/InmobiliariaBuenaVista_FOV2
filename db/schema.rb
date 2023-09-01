@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_01_080754) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_01_112433) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,11 +44,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_01_080754) do
 
   create_table "buildings", force: :cascade do |t|
     t.string "name"
-    t.string "adress"
+    t.string "address"
     t.bigint "commune_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commune_id"], name: "index_buildings_on_commune_id"
+  end
+
+  create_table "buildings_services", id: false, force: :cascade do |t|
+    t.bigint "building_id", null: false
+    t.bigint "service_id", null: false
   end
 
   create_table "communes", force: :cascade do |t|
@@ -104,6 +109,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_01_080754) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -111,6 +117,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_01_080754) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "buildings", "communes"
+  add_foreign_key "buildings_services", "buildings"
+  add_foreign_key "buildings_services", "services"
   add_foreign_key "departments", "buildings"
   add_foreign_key "departments", "modalities"
   add_foreign_key "departments", "statuses"

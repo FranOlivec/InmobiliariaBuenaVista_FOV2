@@ -12,3 +12,20 @@
 </div>
 
 <%= link_to "New department", new_department_path %>
+
+<div id="departments">
+  <% @departments.each do |department| %>
+    <div class="department">
+      <p><strong>Número:</strong> <%= department.number %></p>
+      <p><strong>Precio:</strong> <%= department.price %></p>
+      <p><strong>Edificio:</strong> <%= department.building.name %></p>
+      <%= link_to 'Ver Detalles', department_path(department) %>
+    </div>
+    <hr>
+  <% end %>
+</div>
+
+<%= link_to "New department", new_department_path %>
+
+
+

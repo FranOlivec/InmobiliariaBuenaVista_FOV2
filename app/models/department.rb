@@ -3,4 +3,5 @@ class Department < ApplicationRecord
   belongs_to :building
   belongs_to :status
   belongs_to :modality
+  has_one_attached :image
 end

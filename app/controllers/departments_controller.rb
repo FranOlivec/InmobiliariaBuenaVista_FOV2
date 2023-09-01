@@ -1,13 +1,21 @@
 class DepartmentsController < ApplicationController
   before_action :set_department, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, only: [:admin_index] 
+  before_action :authorize_admin_or_vendedor, only: [:admin_index] 
 
   # GET /departments or /departments.json
   def index
+    @departments = Department.includes(:building).all
+  end
+
+  def admin_index
     @departments = Department.all
   end
 
+
   # GET /departments/1 or /departments/1.json
   def show
+    @department = Department.includes(:building).find(params[:id])
   end
 
   # GET /departments/new
@@ -66,5 +74,14 @@ class DepartmentsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def department_params
       params.require(:department).permit(:number, :price, :type_id, :building_id, :status_id, :modality_id)
+    end
+
+
+    def authorize_admin_or_vendedor
+      puts "Current user role: #{current_user.role}"
+      unless current_user.admin? || current_user.vendedor?
+        flash[:alert] = "No tienes permisos para acceder a esta sección."
+        redirect_to root_path 
+      end
     end
 end

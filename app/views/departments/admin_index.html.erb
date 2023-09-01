@@ -1,0 +1,30 @@
+<h2 class="mb-4">Listado de todos los departamentos</h2>
+
+<table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th>Número</th>
+      <th>Tipología</th>
+      <th>Modalidad</th>
+      <th>Precio</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @departments.each do |department| %>
+      <tr>
+        <td><%= department.number %></td>
+        <td><%= department.type.name %></td>
+        <td><%= department.modality.name %></td>
+        <td>$<%= department.price %></td>
+        <td><%= department.status.name %></td>
+        <td>
+          <%= link_to 'Ver', department_path(department), class: "btn btn-info btn-sm" %>
+          <%= link_to 'Editar', edit_department_path(department), class: "btn btn-warning btn-sm" %>
+          <%= link_to 'Eliminar', department_path(department), method: :get, data: { confirm: '¿Estás seguro?' }, class: "btn btn-danger btn-sm" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

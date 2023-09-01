@@ -1,10 +1,33 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+  <h2>Detalles del Departamento Número: <%= @department.number %></h2>
+  
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">Información General</h5>
+      <p class="card-text">
+        <strong>Tipología:</strong> <%= @department.type.name %><br>
+        <strong>Modalidad:</strong> <%= @department.modality.name %><br>
+        <strong>Precio:</strong> $<%= @department.price %><br>
+        <strong>Dirección del edificio:</strong> <%= @department.building.address %><br>
+        <strong>Nombre del edificio:</strong> <%= @department.building.name %><br>
+        <strong>Servicios del edificio:</strong>
+        <%= @department.building.services.pluck(:name).join(', ') %>
+      </p>
+    </div>
+  </div>
 
-<%= render @department %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">Imágenes</h5>
+      <div class="card-text">
+        <% if @department.image.attached? %>
+          <%= image_tag(@department.image, class: 'img-fluid') %>
+        <% else %>
+          <%= image_tag("estudio.jpg", class: 'img-fluid') %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 
-<div>
-  <%= link_to "Edit this department", edit_department_path(@department) %> |
-  <%= link_to "Back to departments", departments_path %>
-
-  <%= button_to "Destroy this department", @department, method: :delete %>
+  <%= link_to 'Volver al listado', departments_path, class: 'btn btn-primary mt-5' %>
 </div>

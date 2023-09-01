@@ -8,4 +8,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "homes#index"
+  get 'admin/departments', to: 'departments#admin_index', as: 'admin_departments'
 end
