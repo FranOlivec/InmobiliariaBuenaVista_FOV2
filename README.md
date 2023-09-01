@@ -22,3 +22,12 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+credenciales de administrador: 
+    Email: admin@gmail.com
+    contraseña: Contraseña1
+
+Credenciales de vendedor: 
+    Email: vendedor1@gmail.com
+    contraseña: Contraseña1
+
